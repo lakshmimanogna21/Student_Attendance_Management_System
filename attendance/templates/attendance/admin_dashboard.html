@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'attendance/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <h1>Admin Dashboard</h1>
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
+    <div class="welcome">
+        <h2>Welcome, {{ request.user.username }}!</h2>
+        <p>Role: Admin</p>
+    </div>
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Total Students</h3>
+            <p>{{ students.count }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Records</h3>
+            <p>{{ all_attendance.count }}</p>
+        </div>
+    </div>
+    <div class="card">
+        <h2 style="margin-bottom: 20px; color: #333;">All Students</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.username }}</td>
+                    <td>{{ student.email }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" style="text-align:center; color:#999; padding: 30px;">No students yet</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card">
+        <h2 style="margin-bottom: 20px; color: #333;">All Attendance Records</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in all_attendance %}
+                <tr>
+                    <td>{{ record.student.username }}</td>
+                    <td>{{ record.date }}</td>
+                    <td class="{% if record.status == 'Present' %}present{% else %}absent{% endif %}">
+                        {{ record.status }}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="text-align:center; color:#999; padding: 30px;">No records yet</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
