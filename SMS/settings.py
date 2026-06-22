@@ -121,11 +121,4 @@ STATICFILES_DIRS=[
     BASE_DIR/'accounts/static',
 ]
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'badvelimanogna0@gmail.com'
-EMAIL_HOST_PASSWORD = 'Manu@403'
+AUTH_USER_MODEL = 'accounts.CustomUser'git
